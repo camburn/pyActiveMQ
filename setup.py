@@ -12,13 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distutils.core import setup
-from distutils.extension import Extension
-from distutils.util import get_platform
+from setuptools import Extension, setup
 import os.path
 import sys
 
-if get_platform().startswith('win'):
+if sys.platform.startswith('win'):
     include_dirs = [
         '..\\activemq-cpp-library-3.5.0\\src\\main'
         ]
@@ -42,7 +40,7 @@ if get_platform().startswith('win'):
         'advapi32',
         'shell32'
         ]
-    if get_platform() == 'win-amd64':
+    if sys.platform == 'win-amd64':
         library_dirs = [
             'win_build\\Release.x64',
             '..\\apr\\x64\\LibR',
@@ -66,9 +64,9 @@ if get_platform().startswith('win'):
         ('PYACTIVEMQ_ENABLE_DOCSTRINGS', 0)
         ]
 else:
-    ver = '3.5.0'
+    ver = '3.9.4'
     include_dirs = [
-        '/opt/activemq-cpp-{ver}/include/activemq-cpp-{ver}'.format(ver=ver)
+        '/opt/activemq-cpp-library-{ver}/src/main'.format(ver=ver)
 
         ]
     libraries = [
@@ -77,11 +75,11 @@ else:
         'boost_python'
         ]
     library_dirs = [
-        '/opt/activemq-cpp-{ver}/lib'.format(ver=ver)
+        '/opt/activemq-cpp-library-{ver}/src/main'.format(ver=ver)
         ]
     extra_compile_args = []
     extra_link_args = [
-        '-Wl,-rpath,/opt/activemq-cpp-{ver}/lib'.format(ver=ver)
+        '-Wl,-rpath,/opt/activemq-cpp-library-{ver}/src/main'.format(ver=ver)
         ]
     define_macros = [
         ('BOOST_PYTHON_NO_PY_SIGNATURES', 1),
