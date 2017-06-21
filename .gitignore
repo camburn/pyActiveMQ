@@ -1,2 +1,6 @@
 /.project
 /.pydevproject
+env
+build
+dist
+pyactivemq.egg-info
